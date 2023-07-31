@@ -1,4 +1,5 @@
 import express from "express";
+import calculo from "./calculoRoute.js"
 
 const routes = (app) => {
     app.route('/').get((req,res) => {

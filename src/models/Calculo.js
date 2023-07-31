@@ -8,3 +8,7 @@ const calculoSchema = new mongoose.Schema({
     modelo:     {type: String},
     valor:      {type: Number}
 })
+
+const calculo = mongoose.model('calculo', calculoSchema);
+
+export default calculo;
