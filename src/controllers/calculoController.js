@@ -8,14 +8,15 @@ class CalculoController {
       
         for (const param of parametros) {
             const [chave, valor] = param.split('=');
-            filtro[`taxaRisco.${chave}`] = valor;
-        }
+            filtro[`taxaRisco.ajustes_cob_2.1.${chave}`] = valor;
+          }
       
         try {
             const resultado = await calculo.findOne(filtro);
       
             if (!resultado) {
-                return null; // Ajuste não encontrado para os parâmetros informados
+                res.status(500).send(filtro) // Ajuste não encontrado para os parâmetros informados
+                return true
             }
       
             // Encontre o ajuste correto dentro do resultado
@@ -23,7 +24,7 @@ class CalculoController {
             res.status(200).send(ajuste)
         } catch (error) {
             console.error('Erro ao buscar ajuste:', error);
-            res.status(500).json(err)
+            res.status(500).json(error)
         }
     }
 
