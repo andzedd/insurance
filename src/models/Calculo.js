@@ -6,7 +6,7 @@ const calculoSchema = new mongoose.Schema({
     eqpmdl: {type: Number},
     eqpmrc: {type: Number},
     ajuste: {type: Number},
-})
+},{ strict: false })
 
 const calculo = mongoose.model('calculo', calculoSchema);
 
