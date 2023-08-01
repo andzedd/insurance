@@ -2,31 +2,31 @@ import calculo from "../models/Calculo.js";
 
 class CalculoController {
     static taxaRisco = async (req,res) => {
-        let string = "idzmaxlimvlr02=7600;eqpmrc=1;eqpmdl=2"
-        let c
+        let string = "idzmaxlimvlr02=8888;eqpmrc=2;eqpmdl=4"
         const parametros = string.split(';');
         const filtro = {};
       
         for (const param of parametros) {
             const [chave, valor] = param.split('=');
-            filtro[`taxaRisco.danos_eletricos.${chave}`] = valor;
+            filtro[`taxaRiscoDanosEletricos.${chave}`] = valor;
         }
       
         try {
-            const resultado = await calculo.findOne(filtro)
+            const resultado = await calculo.find("taxaRiscoDanosEletricos");
       
-            if (!resultado) {
-                return true
+            if (!resultado || resultado.length === 0) {
+              return res.status(404).send(filtro);
             }
-      
-            // Encontre o ajuste correto dentro do resultado
-            //const ajuste = Object.values(resultado.taxaRisco)[0];
-            const ajuste = resultado.taxaRisco.danos_eletricos[1].ajuste
-            res.status(200)
-        } catch (error) {
+            console.log(resultado)
+            // Como a consulta retorna um array, pegamos o primeiro item
+            //const ajuste = resultado;
+            //const ajt = ajuste.ajt;
+            //console.log(resultado)
+            res.status(200).send(resultado);
+          } catch (error) {
             console.error('Erro ao buscar ajuste:', error);
-            res.status(500).send(filtro)
-        }
+            res.status(500).send("erro");
+          }
     }
 
     static calcular = async (req,res) => {
