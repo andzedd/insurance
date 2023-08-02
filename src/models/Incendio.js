@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 
 const incendioSchema = new mongoose.Schema({
-    id: {type: String}
+    id: {type: String},
+    idzmaxlimvlr01: {type:String}
 }, {strict:false})
 
 const incendio = mongoose.model('taxaRiscoIncendio', incendioSchema)

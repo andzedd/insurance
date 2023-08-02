@@ -2,7 +2,7 @@ import calculo from "../models/Calculo.js";
 
 class CalculoController {
     static taxaRisco = async (req,res) => {
-        let string = "idzmaxlimvlr02=8888;eqpmrc=2;eqpmdl=4"
+        let string = "idzmaxlimvlr01=8888;eqpmrc=2;eqpmdl=4"
         const parametros = string.split(';');
         const filtro = {};
       
@@ -12,7 +12,7 @@ class CalculoController {
         }
       
         try {
-            const resultado = await calculo.find("taxaRiscoDanosEletricos");
+            const resultado = await calculo.find(filtro);
       
             if (!resultado || resultado.length === 0) {
               return res.status(404).send(filtro);

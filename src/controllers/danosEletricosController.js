@@ -1,4 +1,4 @@
-import danosEletricos from "../models/DanosEletricos";
+import danosEletricos from "../models/DanosEletricos.js";
 
 class DanosEletricosController {
     static taxaRisco = async (req,res) => {
