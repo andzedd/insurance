@@ -16,13 +16,13 @@ class IncendioController {
             const resultado = await incendio.find(filtro);
       
             if (!resultado || resultado.length === 0) {
-              return res.status(404).send(filtro);
-            }
-            for(let x in resultado){
+              return res.status(404).send("Nenhuma taxa de risco encontrada");
+            } else {
+                for(let x in resultado){
                 ajuste = ajuste * parseFloat(resultado[x].ajt)
+                }
             }
-            console.log(ajuste)
-            res.status(200).send(resultado);
+            res.status(200).send(`Taxa de risco total: ${ajuste}`);
         } catch (error) {
             console.error('Erro ao buscar ajuste:', error);
             res.status(500).send("erro");

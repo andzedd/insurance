@@ -1,27 +1,10 @@
 import danosEletricos from "../models/DanosEletricos.js";
+import taxaRisco from "../util/taxaRisco.js";
 
 class DanosEletricosController {
-    static taxaRisco = async (req,res) => {
-        let string = "idzmaxlimvlr02=7500;eqpmrc=1;eqpmrc=2"
-        const parametros = string.split(';');
-        const filtro = {};
-      
-        for (const param of parametros) {
-            const [chave, valor] = param.split('=');
-            filtro[`${chave}`] = valor;
-        }
-
-        try {
-            const resultado = await danosEletricos.findOne(filtro);
-      
-            if (!resultado || resultado.length === 0) {
-              return res.status(404).send(filtro);
-            }
-            res.status(200).send(resultado);
-        } catch (error) {
-            console.error('Erro ao buscar ajuste:', error);
-            res.status(500).send("erro");
-        }
+    static buscaTaxaRisco = async (req,res) => {
+        let string = "idzmaxlimvlr02=5000;eqpmrc=2;eqpmdl=5"
+        taxaRisco(req,res,string,danosEletricos)
     }
 }
 
