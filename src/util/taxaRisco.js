@@ -1,28 +1,23 @@
 const taxaRisco = async (req,res,string,cob) => {
-    const parametros = string.split(';');
-    const filtro = {};
-    let ajuste = 1;
-      
-    for (const param of parametros) {
-        const [chave, valor] = param.split('=');
-        filtro[`${chave}`] = valor;
-    }
+    try{
+        const conditions = {};
+        const keyValue = string.split(";");
+        for(const pair of keyValue){
+            const [k,v] = pair.split('=');
+            conditions[k] = v;
+        }
+        const result = await cob.findOne(conditions, {projection: {ajt:1}});
+        console.log(conditions)
 
-    try {
-        const resultado = await cob.find(filtro);
-        if (!resultado || resultado.length === 0) {
-            return res.status(404).send(filtro);
+        if(result){
+            const ajuste = result.ajt;
+            res.status(200).send(`Ajuste encontrado: ${result.ajt}`);
         } else {
-            for(let x in resultado){
-                ajuste = ajuste * parseFloat(resultado[x].ajt)
-            }
-            res.status(202).send(filtro)
+            res.status(400).send("Nenhum ajuste encontrado");
         }
-        res.status(200).send(`Taxa de risco total: ${ajuste}`);
-        } catch (error) {
-            console.error('Erro ao buscar ajuste:', error);
-            res.status(500).send("erro");
-        }
+    } catch (err) {
+        res.status(400).send(`Erro: ${err}`);
+    }
 }
 
 export default taxaRisco
