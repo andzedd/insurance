@@ -1,16 +1,16 @@
 const taxaRisco = async (req,res,string,cob) => {
     try{
-        const params = string.split(';');
-        const filter = {};
+        const filter = req.body;
         const validKeys = cob.schema.obj;
-        params.forEach(param => {
-            const [key, value] = param.split('=');
-            if(validKeys.hasOwnProperty(key)){
-                filter[key] = value;
-            }
-        });
+        
+        const filteredKeys = Object.keys(filter).filter(key => validKeys.hasOwnProperty(key));
+        const query = filteredKeys.reduce((acc, key) => {
+            acc[key] = filter[key];
+            return acc;
+          }, {});
 
-        const objects = await cob.find(filter).exec();
+        console.log(query)
+        const objects = await cob.find(query).exec();
 
         let ajuste = 1;
 
