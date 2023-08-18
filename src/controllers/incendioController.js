@@ -3,7 +3,7 @@ import taxaRisco from "../util/taxaRisco.js";
 
 class IncendioController {
     static taxaRisco = async (req,res) => {
-        let string = "idzmaxlimvlr01=7800;eqpmrc=1;eqpmdl=3"
+        let string = "idzmaxlimvlr01=7800;eqpmrc=1;eqpmdl=3;casa=12;teste=123;abc=123"
         taxaRisco(req,res,string,incendio)
     }
 }
