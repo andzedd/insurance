@@ -1,29 +1,43 @@
-const taxaRisco = async (req,res,string,cob) => {
-    try{
-        const filter = req.body;
-        const validKeys = cob.schema.obj;
-        
-        const filteredKeys = Object.keys(filter).filter(key => validKeys.hasOwnProperty(key));
-        const query = filteredKeys.reduce((acc, key) => {
-            acc[key] = filter[key];
-            return acc;
-          }, {});
+const taxaRisco = async (req, res, cob) => {
+    try {
+        const inputData = req.body;
+        const validDocuments = [];
 
-        console.log(query)
-        const objects = await cob.find(query).exec();
+        const documents = await cob.find({}).exec();
 
-        let ajuste = 1;
+        documents.forEach(document => {
+            const filteredDocument = { ...document };
+            delete filteredDocument.ajt;
 
-        objects.forEach(obj => {
-            if(obj.ajt) {
-                ajuste *= parseFloat(obj.ajt)
+            if (isObjectSubset(inputData, filteredDocument._doc)) {
+                validDocuments.push(document);
             }
-        })
+        });
 
-        res.status(200).send(`Total ajuste: ${ajuste}`)
-    } catch (err){
-        res.status(500).send(`Erro: ${err}`)
+        let finalValue = 1;
+        validDocuments.forEach(document => {
+            finalValue *= parseFloat(document.ajt);
+        });
+
+        res.json({ finalValue });
+
+        return finalValue;
+
+    } catch (err) {
+        res.status(500).send(`Erro: ${err}`);
     }
+};
+
+function isObjectSubset(subset, superset) {
+    for (const key in subset) {
+        if(superset[key] === undefined){
+            break;
+        }
+        if (subset[key] !== superset[key]) {
+            return false;
+        }
+    }
+    return true;
 }
 
-export default taxaRisco
+export default taxaRisco;
