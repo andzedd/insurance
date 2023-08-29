@@ -20,6 +20,7 @@ const acharAjuste = async (req,res,camada) => {
             ajusteFinal *= parseFloat(ajuste.ajt);
         });
 
+        ajusteFinal = Math.round((ajusteFinal + Number.EPSILON) * 10000) / 10000
         return ajusteFinal;
     } catch (err) {
         res.status(500).send(`Erro: ${err}`);
