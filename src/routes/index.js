@@ -1,7 +1,5 @@
 import express from "express";
 import calculo from "./calculoRoute.js"
-import incendio from "./incendioRoute.js"
-import danoseletricos from "./danosEletricosRoute.js"
 
 const routes = (app) => {
     app.route('/').get((req,res) => {
@@ -9,9 +7,7 @@ const routes = (app) => {
     })
     app.use(
         express.json(),
-        calculo,
-        incendio,
-        danoseletricos
+        calculo
     )
 }
 
