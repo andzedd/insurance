@@ -1,4 +1,3 @@
-import calculo from "../models/Calculo.js";
 import incendio from "../models/Incendio.js";
 import taxaRisco from "../util/taxaRisco.js";
 

@@ -53,3 +53,5 @@ function comparaObjetos(jsonEntrada,jsonBanco){
     }
     return true;
 }
+
+export default acharAjuste;
