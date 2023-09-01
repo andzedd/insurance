@@ -1,6 +1,6 @@
 const acharAjuste = async (req,res,camada) => {
     try{
-        const jsonEntrada = req.body;
+        const jsonEntrada = req.body.calculo.dadosOrcamento;
         const ajustes = [];
 
         const ajustesBanco = await camada.find({}).exec();
