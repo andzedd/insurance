@@ -1,12 +1,10 @@
 import mongoose from "mongoose";
 
 const incendioSchema = new mongoose.Schema({
-    id: {type: String},
-    idzmaxlimvlr01: {type:String},
-    eqpmrc: {type: String},
-    eqpmdl: {type: String}
+    id: {type: String}
 }, {strict:false})
 
-const incendio = mongoose.model('taxaRiscoIncendio', incendioSchema)
+const taxaRiscoIncendio = mongoose.model('taxariscoincendio', incendioSchema)
+const premioRiscoIncendio = mongoose.model('premioriscoincendio', incendioSchema)
 
-export default incendio
+export { taxaRiscoIncendio, premioRiscoIncendio }

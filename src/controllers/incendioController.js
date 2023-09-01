@@ -1,15 +1,16 @@
 import taxaRiscoUtil from "../util/taxaRiscoUtil.js";
+import { taxaRiscoIncendio, premioRiscoIncendio } from "../models/Incendio.js"
 
-const premioIncendio = (req,res,cobertura) => {
+const premioIncendio = (req,res) => {
     let premio = 0;
-    let taxaRisco = valorTaxaRisco(req,res,cobertura);
-    premio = taxa;
+    let taxaRisco = valorTaxaRisco(req,res,taxaRiscoIncendio);
+    premio = taxaRisco;
 
     return premio;
 }
 
-const valorTaxaRisco = (req,res,cobertura) => {
-    return taxaRiscoUtil(req,res,cobertura);
+const valorTaxaRisco = (req,res,taxaRiscoIncendio) => {
+    return taxaRiscoUtil(req,res,taxaRiscoIncendio);
 }
 
 export default premioIncendio;
