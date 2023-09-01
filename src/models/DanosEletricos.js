@@ -4,6 +4,10 @@ const danosEletricosSchema = new mongoose.Schema({
     id: {type: String}
 }, {strict:false})
 
-const danosEletricos = mongoose.model('taxaRiscoDanosEletricos', danosEletricosSchema)
+const taxaRiscoDanosEletricos = mongoose.model('taxariscodanoseletricos', danosEletricosSchema)
+const premioRiscoDanosEletricos = mongoose.model('premioriscodanoseletricos', danosEletricosSchema)
 
-export default danosEletricos
+module.exports = {
+    taxaRiscoDanosEletricos,
+    premioRiscoDanosEletricos
+}
