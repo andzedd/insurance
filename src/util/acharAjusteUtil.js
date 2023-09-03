@@ -16,9 +16,11 @@ const acharAjuste = async (req,res,camada) => {
         });
 
         let ajusteFinal = 1;
-        ajustes.forEach(ajuste => {
-            ajusteFinal *= parseFloat(ajuste.ajt);
-        });
+        if(ajustes.length > 0){
+            ajustes.forEach(ajuste => {
+                ajusteFinal *= parseFloat(ajuste.ajt);
+            });
+        }
 
         ajusteFinal = Math.round((ajusteFinal + Number.EPSILON) * 10000) / 10000
         return ajusteFinal;
